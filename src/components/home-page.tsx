@@ -483,16 +483,15 @@ export function HomePage() {
                 <div className="scr-btn">Confirmar parcelamento</div>
                 <p className="scr-note">Valores de exemplo</p>
               </div>
+              <div className="chip chip-a">
+                <i className="ok" />
+                Pix aprovado
+              </div>
+              <div className="chip chip-b">
+                <small>1ª parcela</small>
+                <b>{HERO_OPTS[option].v}</b>
+              </div>
             </div>
-            <div className="chip chip-a">
-              <i className="ok" />
-              Pix aprovado
-            </div>
-            <div className="chip chip-b">
-              <small>1ª parcela</small>
-              <b>{HERO_OPTS[option].v}</b>
-            </div>
-            <div className="chip chip-c">Sem cartão</div>
           </div>
         </div>
       </section>
