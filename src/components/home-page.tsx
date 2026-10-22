@@ -18,7 +18,7 @@ const HERO_OPTS = [
   { k: "4x", v: "R$ 60,00" },
 ];
 
-type Row = { label: string; value: string };
+type Row = { title: string; date: string; value: string };
 type SimState = {
   amountLabel: string;
   summary: string;
@@ -176,7 +176,8 @@ function computeSim(raw: string, count: number, previousOptions: number[]): SimS
       .toLocaleDateString("pt-BR", { day: "2-digit", month: "short" })
       .replace(".", "");
     rows.push({
-      label: `${i + 1}ª parcela · ${date}`,
+      title: `${i + 1}ª parcela`,
+      date,
       value: brl(installment),
     });
   }
@@ -641,9 +642,10 @@ export function HomePage() {
             {sim.rows.length > 0 ? (
               <ol className={sim.invalid ? "tl err" : "tl"} id="tl">
                 {sim.rows.map((row, index) => (
-                  <li key={`${row.label}-${row.value}`} style={{ animationDelay: `${index * 60}ms` }}>
-                    <span>{row.label}</span>
-                    <b>{row.value}</b>
+                  <li key={`${row.title}-${row.date}-${row.value}`} style={{ animationDelay: `${index * 60}ms` }}>
+                    <span className="tl-name">{row.title}</span>
+                    <span className="tl-date">{row.date}</span>
+                    <b className="tl-value">{row.value}</b>
                   </li>
                 ))}
               </ol>
