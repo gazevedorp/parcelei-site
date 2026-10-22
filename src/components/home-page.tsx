@@ -295,7 +295,14 @@ export function HomePage() {
     document.documentElement.classList.add("js");
 
     const nav = document.querySelector(".nav");
-    const onScroll = () => nav?.classList.toggle("scrolled", window.scrollY > 24);
+    const art = document.querySelector<HTMLElement>(".hero-art");
+    const onScroll = () => {
+      nav?.classList.toggle("scrolled", window.scrollY > 24);
+      if (!frozen && art) {
+        const shift = Math.min(window.scrollY, 480) * 0.06;
+        art.style.transform = `translate3d(0, ${shift}px, 0)`;
+      }
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
 
@@ -331,15 +338,18 @@ export function HomePage() {
         screen.classList.toggle("on", screenIndex === index),
       );
     };
-    const stepObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setStep(steps.indexOf(entry.target));
-        });
-      },
-      { rootMargin: "-45% 0px -45% 0px" },
-    );
-    steps.forEach((step) => stepObserver.observe(step));
+    let stepObserver: IntersectionObserver | undefined;
+    if (!document.documentElement.classList.contains("is-static")) {
+      stepObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) setStep(steps.indexOf(entry.target));
+          });
+        },
+        { rootMargin: "-45% 0px -45% 0px" },
+      );
+      steps.forEach((step) => stepObserver?.observe(step));
+    }
 
     let timer = 0;
     if (!frozen) {
@@ -358,7 +368,7 @@ export function HomePage() {
     return () => {
       window.removeEventListener("scroll", onScroll);
       revealObserver?.disconnect();
-      stepObserver.disconnect();
+      stepObserver?.disconnect();
       window.clearInterval(timer);
       window.clearTimeout(fallback);
     };
