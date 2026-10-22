@@ -36,24 +36,73 @@ const initialSim: SimState = {
   options: [1, 2, 3, 4],
 };
 
-const PIX_QR = QRCode.create("parcelei.com.br", { errorCorrectionLevel: "M" });
+const PIX_QR = QRCode.create("parcelei.com.br", { errorCorrectionLevel: "Q", version: 2 });
+const QR_CELL = 5;
+const QR_QUIET = 4;
+
+function inFinder(x: number, y: number, size: number) {
+  return (x < 7 && y < 7) || (x >= size - 7 && y < 7) || (x < 7 && y >= size - 7);
+}
 
 function PixQr() {
   const size = PIX_QR.modules.size;
-  let path = "";
+  const span = (size + QR_QUIET * 2) * QR_CELL;
+  const origin = QR_QUIET * QR_CELL;
+  const modules = [];
   for (let y = 0; y < size; y += 1) {
     for (let x = 0; x < size; x += 1) {
-      if (PIX_QR.modules.get(y, x)) path += `M${x} ${y}h1v1h-1z`;
+      if (PIX_QR.modules.get(y, x) && !inFinder(x, y, size)) modules.push({ x, y });
     }
   }
-  const quiet = 2;
+  const finders = [
+    [0, 0],
+    [size - 7, 0],
+    [0, size - 7],
+  ];
+
   return (
     <svg
-      viewBox={`${-quiet} ${-quiet} ${size + quiet * 2} ${size + quiet * 2}`}
+      viewBox={`0 0 ${span} ${span}`}
+      width={span}
+      height={span}
       role="img"
       aria-label="QR Code de exemplo"
+      shapeRendering="crispEdges"
     >
-      <path d={path} fill="#000035" />
+      <rect width={span} height={span} fill="#fff" />
+      {finders.map(([x, y]) => {
+        const left = origin + x * QR_CELL;
+        const top = origin + y * QR_CELL;
+        return (
+          <g key={`${x}-${y}`}>
+            <rect x={left} y={top} width={7 * QR_CELL} height={7 * QR_CELL} fill="#000035" />
+            <rect
+              x={left + QR_CELL}
+              y={top + QR_CELL}
+              width={5 * QR_CELL}
+              height={5 * QR_CELL}
+              fill="#fff"
+            />
+            <rect
+              x={left + 2 * QR_CELL}
+              y={top + 2 * QR_CELL}
+              width={3 * QR_CELL}
+              height={3 * QR_CELL}
+              fill="#000035"
+            />
+          </g>
+        );
+      })}
+      {modules.map(({ x, y }) => (
+        <rect
+          key={`${x}-${y}`}
+          x={origin + x * QR_CELL + 1}
+          y={origin + y * QR_CELL + 1}
+          width={QR_CELL - 2}
+          height={QR_CELL - 2}
+          fill="#000035"
+        />
+      ))}
     </svg>
   );
 }
