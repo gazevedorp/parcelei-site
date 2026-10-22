@@ -492,6 +492,7 @@ export function HomePage() {
               <small>1ª parcela</small>
               <b>{HERO_OPTS[option].v}</b>
             </div>
+            <div className="chip chip-c">Sem cartão</div>
           </div>
         </div>
       </section>
@@ -503,6 +504,7 @@ export function HomePage() {
             <h2>Três toques entre o Pix e as parcelas.</h2>
           </header>
           <div className="how-grid">
+            <div className="how-stage">
             <div className="how-sticky">
               <div className="phone phone-how">
                 <div className="scr scr-light">
@@ -544,6 +546,7 @@ export function HomePage() {
                 </div>
               </div>
             </div>
+            </div>
             <ol className="steps">
               <li className="step on" data-step="1">
                 <span className="num">01</span>
@@ -572,11 +575,15 @@ export function HomePage() {
       </section>
 
       <section id="simulador" className="sec sim">
-        <div className="container sim-in">
-          <div className="sim-copy">
+        <div className="container">
+          <header className="sh sh-center">
             <span className="eyebrow">Simulador</span>
             <h2>Faça a conta antes de comprar.</h2>
             <p className="sub">Digite um valor e veja como ficaria dividido.</p>
+          </header>
+          <div className="sim-panel">
+          <div className="sim-in">
+          <div className="sim-copy">
             <label className="field">
               <span>Valor da compra</span>
               <div className="money">
@@ -641,6 +648,8 @@ export function HomePage() {
                 ))}
               </ol>
             ) : null}
+          </div>
+          </div>
           </div>
         </div>
       </section>
