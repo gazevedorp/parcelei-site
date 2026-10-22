@@ -834,7 +834,7 @@ export function HomePage() {
               src="/photos/cta.webp"
               alt=""
               fill
-              sizes="(max-width: 768px) 100vw, 480px"
+              sizes="(max-width: 768px) 100vw, 800px"
             />
             <span className="cta-shade" />
           </div>
