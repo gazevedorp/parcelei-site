@@ -188,6 +188,7 @@ export function HomePage() {
     if (new URLSearchParams(window.location.search).has("static")) {
       document.documentElement.classList.add("is-static");
     }
+    document.documentElement.classList.add("js");
 
     const nav = document.querySelector(".nav");
     const onScroll = () => nav?.classList.toggle("scrolled", window.scrollY > 24);
@@ -195,7 +196,7 @@ export function HomePage() {
     window.addEventListener("scroll", onScroll, { passive: true });
 
     const reveal = document.querySelectorAll(
-      ".sh,.hero-copy>*,.bento .b,.tr li,.acc,.sim-copy,.sim-out,.cta-in>*",
+      ".sh,.hero-copy>*,.steps,.bento .b,.tr li,.acc,.sim-copy,.sim-out,.cta-in>*,.foot-top>*",
     );
     reveal.forEach((element, index) => {
       element.classList.add("rv");
@@ -243,11 +244,19 @@ export function HomePage() {
       }, 2800);
     }
 
+    const fallback = window.setTimeout(() => {
+      document.querySelectorAll(".rv:not(.in)").forEach((element) => {
+        const rect = element.getBoundingClientRect();
+        if (rect.bottom > 0 && rect.top < window.innerHeight) element.classList.add("in");
+      });
+    }, 2400);
+
     return () => {
       window.removeEventListener("scroll", onScroll);
       revealObserver?.disconnect();
       stepObserver.disconnect();
       window.clearInterval(timer);
+      window.clearTimeout(fallback);
     };
   }, []);
 
@@ -484,12 +493,16 @@ export function HomePage() {
           <div className="sim-out">
             <div className="sim-head">
               <span>Cada parcela</span>
-              <b id="parc">{sim.amountLabel}</b>
-              <small id="resumo">{sim.summary}</small>
+              <b id="parc" key={sim.amountLabel}>
+                {sim.amountLabel}
+              </b>
+              <small id="resumo" key={sim.summary}>
+                {sim.summary}
+              </small>
             </div>
             <ol className={sim.invalid ? "tl err" : "tl"} id="tl">
               {sim.rows.map((row, index) => (
-                <li key={row.label} style={{ animationDelay: `${index * 60}ms` }}>
+                <li key={`${row.label}-${row.value}`} style={{ animationDelay: `${index * 60}ms` }}>
                   <span>{row.label}</span>
                   <b>{row.value}</b>
                 </li>

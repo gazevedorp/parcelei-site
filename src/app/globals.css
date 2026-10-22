@@ -54,7 +54,9 @@ h3{font-size:20px;line-height:1.3;letter-spacing:-.01em;font-weight:600}
 .scr-store{font-weight:600;font-size:15px;margin-bottom:12px}
 .scr-amount{font-size:38px;font-weight:600;letter-spacing:-.03em;margin-bottom:28px;font-variant-numeric:tabular-nums}
 .opts{display:grid;gap:8px;margin-bottom:20px}
-.opt{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);font-size:14px;transition:all .5s var(--ease)}
+.opt{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);font-size:14px;transition:background .5s var(--ease),border-color .5s var(--ease),box-shadow .5s var(--ease);animation:rise .6s var(--ease) both}
+.opt:nth-child(2){animation-delay:.08s}
+.opt:nth-child(3){animation-delay:.16s}
 .opt b{font-weight:600}.opt span{font-variant-numeric:tabular-nums;color:rgba(255,255,255,.8)}
 .opt.on{background:var(--n500);border-color:var(--n300);box-shadow:0 8px 24px -8px rgba(123,162,224,.6)}
 .opt.on span{color:#fff}
@@ -109,10 +111,12 @@ h3{font-size:20px;line-height:1.3;letter-spacing:-.01em;font-weight:600}
 .seg button.on{background:var(--n900);color:#fff}
 .disc{display:flex;gap:10px;margin-top:24px;font-size:14px;color:var(--muted);line-height:1.5}
 .disc svg{flex:0 0 18px;height:18px;margin-top:1px;color:var(--n500)}
-.sim-out{background:var(--n900);color:#fff;border-radius:var(--r-xl);padding:48px;box-shadow:var(--sh-2)}
+.sim-out{position:relative;overflow:hidden;background:var(--n900);color:#fff;border-radius:var(--r-xl);padding:48px;box-shadow:var(--sh-2)}
+.sim-out::before{content:"";position:absolute;width:420px;height:420px;right:-180px;top:-200px;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(28,76,150,.5),transparent 68%);filter:blur(10px);animation:drift 20s ease-in-out infinite alternate}
+.sim-out>*{position:relative}
 .sim-head span{font-size:14px;color:var(--n300);font-weight:500}
-.sim-head b{display:block;font-size:56px;font-weight:600;letter-spacing:-.035em;font-variant-numeric:tabular-nums;margin:4px 0}
-.sim-head small{font-size:15px;color:rgba(255,255,255,.6)}
+.sim-head b{display:block;font-size:56px;font-weight:600;letter-spacing:-.035em;font-variant-numeric:tabular-nums;margin:4px 0;animation:rise .4s var(--ease)}
+.sim-head small{display:block;font-size:15px;color:rgba(255,255,255,.6);animation:rise .4s var(--ease)}
 .tl{list-style:none;margin-top:36px;position:relative}
 .tl:before{content:"";position:absolute;left:7px;top:10px;bottom:10px;width:2px;background:rgba(123,162,224,.25)}
 .tl li{position:relative;display:flex;justify-content:space-between;padding:12px 0 12px 36px;font-size:16px;animation:in .45s var(--ease) both}
@@ -136,7 +140,10 @@ h3{font-size:20px;line-height:1.3;letter-spacing:-.01em;font-weight:600}
 .b-gas{background:var(--n300);color:var(--n900)}
 .b-bill{background:#fff;box-shadow:var(--sh-1)}.b-bill svg{color:var(--n500)}
 /* trust */
-.trust{background:var(--n900);color:#fff}
+.trust{position:relative;overflow:hidden;background:var(--n900);color:#fff}
+.trust::before,.cta-in::before,.foot::before{content:"";position:absolute;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(28,76,150,.42),transparent 68%);filter:blur(12px);animation:drift 18s ease-in-out infinite alternate}
+.trust::before{width:560px;height:560px;left:-160px;bottom:-220px}
+.trust-in{position:relative}
 .tr{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(255,255,255,.12)}
 .tr li{padding:40px 32px 8px 0;margin-right:32px;position:relative}
 .tr li+li{padding-left:32px;border-left:1px solid rgba(255,255,255,.12);margin-right:0}
@@ -156,6 +163,8 @@ h3{font-size:20px;line-height:1.3;letter-spacing:-.01em;font-weight:600}
 /* cta */
 .cta{padding:0 var(--gut) var(--pad)}
 .cta-in{position:relative;overflow:hidden;text-align:center;color:#fff;border-radius:40px;padding:104px 24px;background:radial-gradient(70% 90% at 50% 0%,var(--n500),var(--n700) 45%,var(--n900))}
+.cta-in::before{width:520px;height:520px;right:-120px;top:-180px;animation-duration:22s}
+.cta-in>*{position:relative}
 .cta-mark{height:56px;margin-bottom:32px}
 .cta .lead{color:rgba(255,255,255,.72);margin:16px auto 40px;max-width:520px}
 .wl-center{margin:0 auto}
@@ -164,7 +173,9 @@ h3{font-size:20px;line-height:1.3;letter-spacing:-.01em;font-weight:600}
 .store svg{width:24px;height:24px;stroke:none}
 .store small{display:block;font-size:11px;color:rgba(255,255,255,.6);line-height:1.2}.store b{font-size:16px;line-height:1.2}
 /* footer */
-.foot{background:var(--n900);color:rgba(255,255,255,.65);padding:80px 0 40px;font-size:15px}
+.foot{position:relative;overflow:hidden;background:var(--n900);color:rgba(255,255,255,.65);padding:80px 0 40px;font-size:15px}
+.foot::before{width:420px;height:420px;right:-80px;top:-200px;opacity:.7;animation-duration:26s}
+.foot .container{position:relative}
 .foot-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;padding-bottom:56px;border-bottom:1px solid rgba(255,255,255,.1)}
 .foot-top p{margin-top:16px}
 .foot nav{display:flex;flex-direction:column;gap:12px}.foot nav b{color:#fff;font-weight:600;margin-bottom:4px}
@@ -172,15 +183,16 @@ h3{font-size:20px;line-height:1.3;letter-spacing:-.01em;font-weight:600}
 .pend em{font-style:normal;font-size:11px;padding:2px 8px;border-radius:var(--r-pill);background:rgba(123,162,224,.18);color:var(--n300);margin-left:6px}
 .foot-bot{display:flex;justify-content:space-between;padding-top:32px;font-size:14px}
 .ph{background:rgba(255,200,0,.18);color:#ffd166;padding:1px 6px;border-radius:4px}
-/* reveal */
-.rv{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
-.rv.in{opacity:1;transform:none}
-@keyframes float{50%{transform:translateY(-10px)}}
-@keyframes drift{to{transform:translate(-80px,60px) scale(1.1)}}
+/* reveal: hidden only after JS marks the page, so a failed script leaves every section visible */
+html.js .rv{opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+html.js .rv.in{opacity:1;transform:none}
+@keyframes float{50%{transform:translateY(-8px)}}
+@keyframes drift{to{transform:translate(-48px,36px) scale(1.06)}}
 @keyframes pulse{50%{box-shadow:0 0 0 8px rgba(123,162,224,0)}}
 @keyframes scan{to{top:78%}}
 @keyframes in{from{opacity:0;transform:translateX(-8px)}}
-@media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}html.js .rv,.rv{opacity:1!important;transform:none!important}html{scroll-behavior:auto}}
 /* tablet */
 @media (max-width:1024px){h1{font-size:56px}h2{font-size:40px}.hero-in,.how-grid,.sim-in,.faq-in{gap:48px}}
 /* mobile */
@@ -229,5 +241,5 @@ h1{font-size:44px;line-height:1.04}h2{font-size:32px;line-height:1.12}h3{font-si
 @media (max-width:768px){.chip-a{left:8px;top:-18px}.chip-b{display:none}.stores{flex-wrap:nowrap;gap:8px}.store{padding:10px 14px}.store b{font-size:15px}}
 
 html.is-static,html.is-static *,html.is-static *:before,html.is-static *:after{animation:none!important;transition:none!important}
-html.is-static .rv{opacity:1;transform:none}
+html.is-static .rv,html.is-static.js .rv{opacity:1!important;transform:none!important}
 html.is-static{scroll-behavior:auto}
