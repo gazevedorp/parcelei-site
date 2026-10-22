@@ -22,6 +22,7 @@ type SimState = {
   amountLabel: string;
   summary: string;
   invalid: boolean;
+  vista: boolean;
   rows: Row[];
   options: number[];
 };
@@ -30,6 +31,7 @@ const initialSim: SimState = {
   amountLabel: "R$ 100,00",
   summary: "3 parcelas · total de R$ 300,00",
   invalid: false,
+  vista: false,
   rows: [],
   options: [1, 2, 3, 4],
 };
@@ -82,7 +84,7 @@ function availableCounts(value: number) {
   return counts;
 }
 
-function computeSim(raw: string, count: number, previous: Row[], previousOptions: number[]): SimState {
+function computeSim(raw: string, count: number, previousOptions: number[]): SimState {
   const value = parseAmount(raw);
   if (value < MIN || value > MAX) {
     return {
@@ -92,7 +94,8 @@ function computeSim(raw: string, count: number, previous: Row[], previousOptions
           ? "Digite um valor a partir de R$ 10,00"
           : "Para o exemplo, use até R$ 10.000,00",
       invalid: true,
-      rows: previous,
+      vista: false,
+      rows: [],
       options: previousOptions,
     };
   }
@@ -100,10 +103,11 @@ function computeSim(raw: string, count: number, previous: Row[], previousOptions
   const options = availableCounts(value);
   if (options.length === 0) {
     return {
-      amountLabel: "R$ 0,00",
-      summary: "Valor baixo demais para parcelar. A parcela mínima deste exemplo é R$ 40.",
-      invalid: true,
-      rows: previous,
+      amountLabel: brl(value),
+      summary: "Valor baixo demais para parcelar. A parcela mínima é R$ 40.",
+      invalid: false,
+      vista: true,
+      rows: [],
       options: [],
     };
   }
@@ -131,6 +135,7 @@ function computeSim(raw: string, count: number, previous: Row[], previousOptions
     amountLabel: brl(base / 100),
     summary: `${chosen === 1 ? "1 parcela" : `${chosen} parcelas`} · total de ${brl(value)}`,
     invalid: false,
+    vista: false,
     rows,
     options,
   };
@@ -318,7 +323,7 @@ export function HomePage() {
       setCount(options[options.length - 1]);
       return;
     }
-    setSim((current) => computeSim(raw, count, current.rows, current.options));
+    setSim((current) => computeSim(raw, count, current.options));
   }, [count]);
 
   function onAmount(event: FormEvent<HTMLInputElement>) {
@@ -330,7 +335,7 @@ export function HomePage() {
     const options = value >= MIN && value <= MAX ? availableCounts(value) : [];
     const next = options.length > 0 && !options.includes(count) ? options[options.length - 1] : count;
     if (next !== count) setCount(next);
-    setSim((current) => computeSim(input.value, next, current.rows, current.options));
+    setSim((current) => computeSim(input.value, next, current.options));
   }
 
   return (
@@ -559,22 +564,24 @@ export function HomePage() {
           </div>
           <div className="sim-out">
             <div className="sim-head">
-              <span>Cada parcela</span>
-              <b id="parc" key={sim.amountLabel}>
+              <span>{sim.vista ? "Pagamento à vista" : "Cada parcela"}</span>
+              <b id="parc" key={`${sim.vista ? "vista" : "parc"}-${sim.amountLabel}`}>
                 {sim.amountLabel}
               </b>
               <small id="resumo" key={sim.summary}>
                 {sim.summary}
               </small>
             </div>
-            <ol className={sim.invalid ? "tl err" : "tl"} id="tl">
-              {sim.rows.map((row, index) => (
-                <li key={`${row.label}-${row.value}`} style={{ animationDelay: `${index * 60}ms` }}>
-                  <span>{row.label}</span>
-                  <b>{row.value}</b>
-                </li>
-              ))}
-            </ol>
+            {sim.rows.length > 0 ? (
+              <ol className={sim.invalid ? "tl err" : "tl"} id="tl">
+                {sim.rows.map((row, index) => (
+                  <li key={`${row.label}-${row.value}`} style={{ animationDelay: `${index * 60}ms` }}>
+                    <span>{row.label}</span>
+                    <b>{row.value}</b>
+                  </li>
+                ))}
+              </ol>
+            ) : null}
           </div>
         </div>
       </section>
