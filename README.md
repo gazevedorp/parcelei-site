@@ -30,9 +30,9 @@ Não é necessário um `vercel.json`. Não altere a proteção do deploy por arq
 
 ## Pendências
 
-- CNPJ: `[XX.XXX.XXX/0001-XX]`
+- CNPJ confirmado no rodapé: 58.473.999/0001-76
 - Termos de uso e privacidade: marcados como em breve, sem link
 - Lista de espera: ligar `/api/waitlist` a um serviço. O ponto está marcado com TODO em `src/app/api/waitlist/route.ts`
 - Textos de Confiança (criptografia, validação por CPF e regras do Pix) ainda precisam de confirmação
 - A loja "Mercado Bom Preço" no mockup é fictícia
-- O máximo de parcelas do simulador (2x, 3x e 4x) é exemplo
+- Parcelamento de 1x a 4x, com parcela mínima de R$ 40. O simulador continua sendo exemplo, sem juros ou tarifas

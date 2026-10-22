@@ -3,12 +3,15 @@
 /* Logos are sized by the design spec. next/image inline styles would change that box. */
 /* eslint-disable @next/next/no-img-element */
 
+import QRCode from "qrcode";
 import { useLayoutEffect, useRef, useState, type FormEvent } from "react";
 
 const MAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const MIN = 10;
 const MAX = 10000;
+const MIN_INSTALLMENT = 40;
 const HERO_OPTS = [
+  { k: "1x", v: "R$ 240,00" },
   { k: "2x", v: "R$ 120,00" },
   { k: "3x", v: "R$ 80,00" },
   { k: "4x", v: "R$ 60,00" },
@@ -20,6 +23,7 @@ type SimState = {
   summary: string;
   invalid: boolean;
   rows: Row[];
+  options: number[];
 };
 
 const initialSim: SimState = {
@@ -27,7 +31,30 @@ const initialSim: SimState = {
   summary: "3 parcelas · total de R$ 300,00",
   invalid: false,
   rows: [],
+  options: [1, 2, 3, 4],
 };
+
+const PIX_QR = QRCode.create("parcelei.com.br", { errorCorrectionLevel: "M" });
+
+function PixQr() {
+  const size = PIX_QR.modules.size;
+  let path = "";
+  for (let y = 0; y < size; y += 1) {
+    for (let x = 0; x < size; x += 1) {
+      if (PIX_QR.modules.get(y, x)) path += `M${x} ${y}h1v1h-1z`;
+    }
+  }
+  const quiet = 2;
+  return (
+    <svg
+      viewBox={`${-quiet} ${-quiet} ${size + quiet * 2} ${size + quiet * 2}`}
+      role="img"
+      aria-label="QR Code de exemplo"
+    >
+      <path d={path} fill="#000035" />
+    </svg>
+  );
+}
 
 function brl(value: number) {
   return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
@@ -46,7 +73,16 @@ function addMonths(date: Date, months: number) {
   return next;
 }
 
-function computeSim(raw: string, count: number, previous: Row[]): SimState {
+function availableCounts(value: number) {
+  const cents = Math.round(value * 100);
+  const counts: number[] = [];
+  for (let count = 1; count <= 4; count += 1) {
+    if (Math.floor(cents / count) >= MIN_INSTALLMENT * 100) counts.push(count);
+  }
+  return counts;
+}
+
+function computeSim(raw: string, count: number, previous: Row[], previousOptions: number[]): SimState {
   const value = parseAmount(raw);
   if (value < MIN || value > MAX) {
     return {
@@ -57,16 +93,29 @@ function computeSim(raw: string, count: number, previous: Row[]): SimState {
           : "Para o exemplo, use até R$ 10.000,00",
       invalid: true,
       rows: previous,
+      options: previousOptions,
     };
   }
 
+  const options = availableCounts(value);
+  if (options.length === 0) {
+    return {
+      amountLabel: "R$ 0,00",
+      summary: "Valor baixo demais para parcelar. A parcela mínima deste exemplo é R$ 40.",
+      invalid: true,
+      rows: previous,
+      options: [],
+    };
+  }
+
+  const chosen = options.includes(count) ? count : options[options.length - 1];
   const cents = Math.round(value * 100);
-  const base = Math.floor(cents / count);
-  const rest = cents - base * count;
+  const base = Math.floor(cents / chosen);
+  const rest = cents - base * chosen;
   const today = new Date();
   const rows: Row[] = [];
 
-  for (let i = 0; i < count; i += 1) {
+  for (let i = 0; i < chosen; i += 1) {
     const installment = (base + (i === 0 ? rest : 0)) / 100;
     const due = addMonths(today, i + 1);
     const date = due
@@ -80,9 +129,10 @@ function computeSim(raw: string, count: number, previous: Row[]): SimState {
 
   return {
     amountLabel: brl(base / 100),
-    summary: `${count} parcelas · total de ${brl(value)}`,
+    summary: `${chosen === 1 ? "1 parcela" : `${chosen} parcelas`} · total de ${brl(value)}`,
     invalid: false,
     rows,
+    options,
   };
 }
 
@@ -173,7 +223,7 @@ function WaitlistForm({ className = "" }: { className?: string }) {
 }
 
 export function HomePage() {
-  const [option, setOption] = useState(1);
+  const [option, setOption] = useState(2);
   const [count, setCount] = useState(3);
   const [sim, setSim] = useState<SimState>(initialSim);
   const amountRef = useRef<HTMLInputElement>(null);
@@ -262,7 +312,13 @@ export function HomePage() {
 
   useLayoutEffect(() => {
     const raw = amountRef.current?.value ?? "300,00";
-    setSim((current) => computeSim(raw, count, current.rows));
+    const value = parseAmount(raw);
+    const options = value >= MIN && value <= MAX ? availableCounts(value) : [];
+    if (options.length > 0 && !options.includes(count)) {
+      setCount(options[options.length - 1]);
+      return;
+    }
+    setSim((current) => computeSim(raw, count, current.rows, current.options));
   }, [count]);
 
   function onAmount(event: FormEvent<HTMLInputElement>) {
@@ -271,7 +327,10 @@ export function HomePage() {
     input.value = value
       ? value.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
       : "";
-    setSim((current) => computeSim(input.value, count, current.rows));
+    const options = value >= MIN && value <= MAX ? availableCounts(value) : [];
+    const next = options.length > 0 && !options.includes(count) ? options[options.length - 1] : count;
+    if (next !== count) setCount(next);
+    setSim((current) => computeSim(input.value, next, current.rows, current.options));
   }
 
   return (
@@ -385,16 +444,17 @@ export function HomePage() {
                 <div className="scr scr-light">
                   <div className="hs hs-1 on">
                     <div className="qr">
-                      <i />
-                      <i />
-                      <i />
-                      <i />
+                      <PixQr />
                     </div>
                     <p className="hs-t">Leia o QR Code</p>
                     <p className="hs-s">ou cole o Pix Copia e Cola</p>
                   </div>
                   <div className="hs hs-2">
                     <p className="hs-k">R$ 240,00</p>
+                    <div className="hs-row">
+                      <span>1x</span>
+                      <b>R$ 240,00</b>
+                    </div>
                     <div className="hs-row">
                       <span>2x</span>
                       <b>R$ 120,00</b>
@@ -467,20 +527,27 @@ export function HomePage() {
                 />
               </div>
             </label>
-            <div className="seg" role="radiogroup" aria-label="Número de parcelas">
-              {[2, 3, 4].map((item) => (
-                <button
-                  key={item}
-                  type="button"
-                  role="radio"
-                  aria-checked={count === item}
-                  className={count === item ? "on" : undefined}
-                  onClick={() => setCount(item)}
-                >
-                  {item}x
-                </button>
-              ))}
-            </div>
+            {sim.options.length > 0 ? (
+              <div
+                className="seg"
+                role="radiogroup"
+                aria-label="Número de parcelas"
+                style={{ gridTemplateColumns: `repeat(${sim.options.length}, minmax(0, 1fr))` }}
+              >
+                {sim.options.map((item) => (
+                  <button
+                    key={item}
+                    type="button"
+                    role="radio"
+                    aria-checked={count === item}
+                    className={count === item ? "on" : undefined}
+                    onClick={() => setCount(item)}
+                  >
+                    {item}x
+                  </button>
+                ))}
+              </div>
+            ) : null}
             <p className="disc">
               <svg viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="9" />
@@ -556,6 +623,9 @@ export function HomePage() {
               <p>Boletos e contas pagos no Pix.</p>
             </div>
           </div>
+          <p className="where-note">
+            Não vale para bets, casas de apostas, autofinanciamento nem bebidas alcoólicas.
+          </p>
         </div>
       </section>
 
@@ -616,8 +686,8 @@ export function HomePage() {
             <details open>
               <summary>O que é o Pix Parcelado?</summary>
               <p>
-                É pagar uma compra no Pix e dividir o valor em parcelas pelo app da Parcelei. A
-                loja recebe à vista e você paga aos poucos.
+                É pagar uma compra no Pix e dividir o valor em parcelas pelo app da Parcelei, de 1x
+                a 4x, com parcela mínima de R$ 40. A loja recebe à vista e você paga aos poucos.
               </p>
             </details>
             <details>
@@ -626,7 +696,17 @@ export function HomePage() {
             </details>
             <details>
               <summary>Onde posso usar?</summary>
-              <p>Em qualquer pagamento com Pix, como mercado, farmácia, gás, água e contas da casa.</p>
+              <p>
+                Em pagamentos com Pix do dia a dia, como mercado, farmácia, gás, água e contas da
+                casa.
+              </p>
+            </details>
+            <details>
+              <summary>Onde não posso usar?</summary>
+              <p>
+                Não dá para usar em bets e casas de apostas, em autofinanciamento nem em bebidas
+                alcoólicas.
+              </p>
             </details>
             <details>
               <summary>Quanto custa parcelar?</summary>
@@ -713,7 +793,7 @@ export function HomePage() {
           <div className="foot-bot">
             <span>© 2026 Parcelei. Todos os direitos reservados.</span>
             <span>
-              CNPJ <mark className="ph">[XX.XXX.XXX/0001-XX]</mark>
+              CNPJ 58.473.999/0001-76
             </span>
           </div>
         </div>
