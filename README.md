@@ -34,8 +34,8 @@ As duas fotos estão em `public/photos/`, em WebP, e entram pela `next/image`. A
 
 Não há foto na hero. O fundo já tem o mesh, a grade e o mockup do app. Uma terceira imagem ali competiria com o telefone.
 
-- Onde usar, card Mercado. Mulher fazendo compra na seção de verduras de um supermercado em São Paulo. Autor: Kawê Rodrigues. Foto: https://www.pexels.com/photo/a-woman-in-red-dress-holding-a-basket-with-vegetables-7007790/ . Licença: Pexels License, https://www.pexels.com/license/ . Arquivo: `public/photos/mercado.webp`.
-- CTA final. Mulher em um café de São Paulo, com o celular na mão. Autor: Letícia Alvares. Foto: https://www.pexels.com/photo/smiling-woman-looking-at-smartphone-21367368/ . Licença: Pexels License, https://www.pexels.com/license/ . Arquivo: `public/photos/cta.webp`.
+- Onde usar, card Mercado. Mulher empurrando um carrinho cheio num supermercado, com o celular na mão. Autor: Gustavo Fring. Foto: https://www.pexels.com/photo/a-woman-with-a-shopping-cart-4971954/ . Licença: Pexels License, https://www.pexels.com/license/ . Arquivo: `public/photos/mercado.webp`.
+- CTA final. Mulher em casa, no sofá, sorrindo com o celular na mão e a cabeça inteira no quadro. Autora: Helena Lopes. Foto: https://www.pexels.com/photo/woman-smiling-while-using-phone-on-sofa-in-home-27176011/ . Licença: Pexels License, https://www.pexels.com/license/ . Arquivo: `public/photos/cta.webp`.
 
 ## Pendências
 
