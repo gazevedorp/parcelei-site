@@ -4,6 +4,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 import QRCode from "qrcode";
+import Image from "next/image";
 import { useLayoutEffect, useRef, useState, type FormEvent } from "react";
 
 const MAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -346,7 +347,7 @@ export function HomePage() {
             if (entry.isIntersecting) setStep(steps.indexOf(entry.target));
           });
         },
-        { rootMargin: "-45% 0px -45% 0px" },
+        { rootMargin: "-47% 0px -47% 0px" },
       );
       steps.forEach((step) => stepObserver?.observe(step));
     }
@@ -422,7 +423,7 @@ export function HomePage() {
           <div className="hero-copy">
             <span className="eyebrow eyebrow-dark">
               <i className="dot" />
-              Em fase final de testes
+              Em breve
             </span>
             <h1>
               Pague no Pix.
@@ -664,37 +665,63 @@ export function HomePage() {
           </header>
           <div className="bento">
             <div className="b b-mkt">
-              <svg viewBox="0 0 48 48">
-                <path d="M6 10h5l5 22h22l4-15H14" />
-                <circle cx="19" cy="39" r="2.5" />
-                <circle cx="35" cy="39" r="2.5" />
-              </svg>
-              <h3>Mercado</h3>
-              <p>A compra do mês sem apertar.</p>
+              <Image
+                className="b-photo"
+                src="/photos/mercado.webp"
+                alt=""
+                fill
+                sizes="(max-width: 768px) 100vw, 1152px"
+              />
+              <span className="b-shade" aria-hidden="true" />
+              <div className="b-copy">
+                <span className="seal" aria-hidden="true">
+                  <svg viewBox="0 0 48 48">
+                    <path d="M6 10h5l5 22h22l4-15H14" />
+                    <circle cx="19" cy="39" r="2.5" />
+                    <circle cx="35" cy="39" r="2.5" />
+                  </svg>
+                </span>
+                <div>
+                  <h3>Mercado</h3>
+                  <p>A compra do mês sem apertar.</p>
+                </div>
+              </div>
             </div>
             <div className="b b-far">
-              <svg viewBox="0 0 48 48">
-                <rect x="8" y="16" width="32" height="24" rx="5" />
-                <path d="M18 16v-4a6 6 0 0 1 12 0v4M24 22v12M18 28h12" />
-              </svg>
-              <h3>Farmácia</h3>
-              <p>Remédio na hora certa.</p>
+              <span className="seal" aria-hidden="true">
+                <svg viewBox="0 0 48 48">
+                  <rect x="8" y="16" width="32" height="24" rx="5" />
+                  <path d="M18 16v-4a6 6 0 0 1 12 0v4M24 22v12M18 28h12" />
+                </svg>
+              </span>
+              <div>
+                <h3>Farmácia</h3>
+                <p>Remédio na hora certa.</p>
+              </div>
             </div>
             <div className="b b-gas">
-              <svg viewBox="0 0 48 48">
-                <path d="M24 6c6 8 12 14 12 22a12 12 0 0 1-24 0c0-8 6-14 12-22z" />
-                <path d="M24 40a6 6 0 0 1-6-6c0-3 3-6 6-10 3 4 6 7 6 10a6 6 0 0 1-6 6z" />
-              </svg>
-              <h3>Gás e água</h3>
-              <p>O básico da casa garantido.</p>
+              <span className="seal" aria-hidden="true">
+                <svg viewBox="0 0 48 48">
+                  <path d="M24 6c6 8 12 14 12 22a12 12 0 0 1-24 0c0-8 6-14 12-22z" />
+                  <path d="M24 40a6 6 0 0 1-6-6c0-3 3-6 6-10 3 4 6 7 6 10a6 6 0 0 1-6 6z" />
+                </svg>
+              </span>
+              <div>
+                <h3>Gás e água</h3>
+                <p>O básico da casa garantido.</p>
+              </div>
             </div>
             <div className="b b-bill">
-              <svg viewBox="0 0 48 48">
-                <path d="M12 6h24v36l-4-3-4 3-4-3-4 3-4-3-4 3z" />
-                <path d="M18 16h12M18 23h12M18 30h7" />
-              </svg>
-              <h3>Contas da casa</h3>
-              <p>Boletos e contas pagos no Pix.</p>
+              <span className="seal" aria-hidden="true">
+                <svg viewBox="0 0 48 48">
+                  <path d="M12 6h24v36l-4-3-4 3-4-3-4 3-4-3-4 3z" />
+                  <path d="M18 16h12M18 23h12M18 30h7" />
+                </svg>
+              </span>
+              <div>
+                <h3>Contas da casa</h3>
+                <p>Boletos e contas pagos no Pix.</p>
+              </div>
             </div>
           </div>
           <p className="where-note">
@@ -712,11 +739,11 @@ export function HomePage() {
           <ul className="tr">
             <li>
               <svg viewBox="0 0 24 24">
-                <path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z" />
-                <path d="M9 12l2 2 4-4" />
+                <rect x="3" y="6" width="18" height="12" rx="2" />
+                <path d="M3 3l18 18" />
               </svg>
-              <h3>Segurança</h3>
-              <p>Seus dados protegidos com criptografia.</p>
+              <h3>Sem cartão</h3>
+              <p>Você parcela sem precisar de cartão de crédito.</p>
             </li>
             <li>
               <svg viewBox="0 0 24 24">
@@ -736,11 +763,10 @@ export function HomePage() {
             </li>
             <li>
               <svg viewBox="0 0 24 24">
-                <path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z" />
-                <path d="M10 21h4" />
+                <path d="M5 7h14M5 12h14M5 17h10" />
               </svg>
-              <h3>Lembretes de vencimento</h3>
-              <p>Avisos no app antes de cada parcela vencer.</p>
+              <h3>Até 4 vezes</h3>
+              <p>De 1x a 4x, e o custo total aparece antes de confirmar.</p>
             </li>
           </ul>
         </div>
@@ -802,6 +828,14 @@ export function HomePage() {
 
       <section id="lista" className="cta">
         <div className="container cta-in">
+          <Image
+            className="cta-photo"
+            src="/photos/cta.webp"
+            alt=""
+            fill
+            sizes="(max-width: 768px) 100vw, 1200px"
+          />
+          <span className="cta-shade" aria-hidden="true" />
           <img src="/mark-white.png" alt="" className="cta-mark" />
           <h2>Seja um dos primeiros a parcelar.</h2>
           <p className="lead">Deixe seu contato e avisamos assim que o app estiver disponível.</p>
