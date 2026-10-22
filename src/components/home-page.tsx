@@ -828,14 +828,17 @@ export function HomePage() {
 
       <section id="lista" className="cta">
         <div className="container cta-in">
-          <Image
-            className="cta-photo"
-            src="/photos/cta.webp"
-            alt=""
-            fill
-            sizes="(max-width: 768px) 100vw, 1200px"
-          />
-          <span className="cta-shade" aria-hidden="true" />
+          <div className="cta-visual" aria-hidden="true">
+            <Image
+              className="cta-photo"
+              src="/photos/cta.webp"
+              alt=""
+              fill
+              sizes="(max-width: 768px) 100vw, 480px"
+            />
+            <span className="cta-shade" />
+          </div>
+          <div className="cta-body">
           <img src="/mark-white.png" alt="" className="cta-mark" />
           <h2>Seja um dos primeiros a parcelar.</h2>
           <p className="lead">Deixe seu contato e avisamos assim que o app estiver disponível.</p>
@@ -865,6 +868,7 @@ export function HomePage() {
                 <b>Google Play</b>
               </div>
             </div>
+          </div>
           </div>
         </div>
       </section>

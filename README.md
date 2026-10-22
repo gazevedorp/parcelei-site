@@ -34,7 +34,7 @@ As duas fotos estão em `public/photos/`, em WebP, e entram pela `next/image`. A
 
 Não há foto na hero. O fundo já tem o mesh, a grade e o mockup do app. Uma terceira imagem ali competiria com o telefone.
 
-- Onde usar, card Mercado. Feira de rua em São Paulo, com pessoas e banca de verdura. Autor: Gustavo Denuncio. Foto: https://www.pexels.com/photo/vibrant-street-market-in-sao-paulo-brazil-32015170/ . Licença: Pexels License, https://www.pexels.com/license/ . Arquivo: `public/photos/mercado.webp`.
+- Onde usar, card Mercado. Mercado municipal em São Paulo, com gente nas bancas. Autor: Bianca Galon. Foto: https://www.pexels.com/photo/people-shopping-in-the-mall-11296840/ . Licença: Pexels License, https://www.pexels.com/license/ . Arquivo: `public/photos/mercado.webp`.
 - CTA final. Mulher em um café de São Paulo, com o celular na mão. Autor: Letícia Alvares. Foto: https://www.pexels.com/photo/smiling-woman-looking-at-smartphone-21367368/ . Licença: Pexels License, https://www.pexels.com/license/ . Arquivo: `public/photos/cta.webp`.
 
 ## Pendências
