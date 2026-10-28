@@ -4,8 +4,13 @@
 /* eslint-disable @next/next/no-img-element */
 
 import Image from "next/image";
+import Link from "next/link";
 import { useLayoutEffect, useRef, useState, type FormEvent } from "react";
+import { homeFaqEntries } from "@/data/faq";
+import { FaqItemView } from "./faq-accordion";
 import { SiteFooter } from "./site-footer";
+
+const HOME_FAQ = homeFaqEntries();
 
 const MAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const PRINTS = [
@@ -625,74 +630,22 @@ export function HomePage() {
         <div className="container faq-in">
           <header className="sh">
             <h2>Perguntas frequentes</h2>
-            <p className="sub">
-              Não achou sua dúvida? Fale com a gente pelo WhatsApp, com atendimento em dias úteis.
-            </p>
+            <p className="sub">Tudo o que você precisa saber para usar a Parcelei</p>
           </header>
           <div className="acc">
-            <details open>
-              <summary>O que é o Pix Parcelado?</summary>
-              <p>
-                É pagar uma compra no Pix e dividir o valor em até 4 parcelas pelo app da Parcelei,
-                em compras a partir de R$ 40,00. A loja recebe à vista e você paga aos poucos.
-              </p>
-            </details>
-            <details>
-              <summary>Como funcionam as parcelas?</summary>
-              <p>
-                São até 4 parcelas quinzenais: a primeira no ato da compra e as demais em 15, 30 e
-                45 dias. A cobrança é feita pelo Pix Automático, na conta que você autorizar.
-              </p>
-            </details>
-            <details>
-              <summary>A análise de crédito demora?</summary>
-              <p>
-                Não. Ela é feita na hora, no app, só com o seu CPF. Você vê o resultado antes de
-                confirmar o parcelamento.
-              </p>
-            </details>
-            <details>
-              <summary>Preciso ter cartão de crédito?</summary>
-              <p>Não. Você só precisa do seu CPF e do app da Parcelei.</p>
-            </details>
-            <details>
-              <summary>Onde posso usar?</summary>
-              <p>
-                Em supermercados e mercearias, e na saúde: farmácias, exames e consultas. Outras
-                lojas de varejo entram em breve.
-              </p>
-            </details>
-            <details>
-              <summary>Onde não posso usar?</summary>
-              <ul className="no-list">
-                <li>Pix enviado para CPF de pessoa física.</li>
-                <li>Sites de apostas, cassinos e plataformas similares.</li>
-                <li>Compras abaixo de R$ 40,00.</li>
-                <li>Tributos, multas e renegociação de empréstimos.</li>
-                <li>Pagamento de fatura de cartão.</li>
-              </ul>
-            </details>
-            <details>
-              <summary>Quanto custa parcelar?</summary>
-              <p>
-                Pode haver taxa de serviço ou de conveniência. Tudo aparece no Custo Efetivo Total
-                (CET) antes de você confirmar, e nada é cobrado sem o seu aceite.
-              </p>
-            </details>
-            <details>
-              <summary>A Parcelei é segura?</summary>
-              <p>
-                Sim. Seus dados são tratados conforme a LGPD, o custo total aparece antes da
-                confirmação e cada parcelamento é formalizado em uma Cédula de Crédito Bancário.
-              </p>
-            </details>
-            <details>
-              <summary>Quando o app será lançado?</summary>
-              <p>
-                O app está em fase final de testes. Entre na lista de espera e avisamos você no
-                lançamento.
-              </p>
-            </details>
+            {HOME_FAQ.map(({ category, item }, index) => (
+              <FaqItemView
+                key={item.id}
+                item={item}
+                categoryTitle={category.title}
+                open={index === 0}
+              />
+            ))}
+          </div>
+          <div className="faq-more">
+            <Link href="/faq" className="btn btn-primary">
+              Ver mais
+            </Link>
           </div>
         </div>
       </section>

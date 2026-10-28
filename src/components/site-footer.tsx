@@ -22,14 +22,27 @@ export function SiteFooter() {
                   <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
                 </svg>
               </a>
+              <a
+                href="https://www.linkedin.com/company/parcelei_oficial/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn da Parcelei"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="4" />
+                  <circle cx="8" cy="8.25" r="0.9" fill="currentColor" stroke="none" />
+                  <path d="M8 11.2v5M12.2 11.2V16.2M12.2 13.1a2.1 2.1 0 0 1 4.2 0V16.2" />
+                </svg>
+              </a>
             </div>
           </div>
           <nav>
             <b>Produto</b>
-            <a href="/#como">Como funciona</a>
-            <a href="/#onde">Onde usar</a>
-            <a href="/#seguranca">Segurança</a>
-            <a href="/#duvidas">Dúvidas</a>
+            <Link href="/#como">Como funciona</Link>
+            <Link href="/#onde">Onde usar</Link>
+            <Link href="/#seguranca">Segurança</Link>
+            <Link href="/#duvidas">Dúvidas</Link>
+            <Link href="/faq">FAQ</Link>
           </nav>
           <nav>
             <b>Contato</b>
@@ -37,7 +50,7 @@ export function SiteFooter() {
               WhatsApp <em>(número a confirmar)</em>
             </span>
             <span>Atendimento em dias úteis.</span>
-            <a href="/#lista">Lista de espera</a>
+            <Link href="/#lista">Lista de espera</Link>
             <PartnerModal />
           </nav>
           <nav>
