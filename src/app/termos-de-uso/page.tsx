@@ -254,7 +254,9 @@ const SECTIONS: LegalSection[] = [
       {
         ul: [
           "Chat disponível no site www.parcelei.com.br",
-          "WhatsApp: (11) 92139-2248",
+          <a key="whatsapp" href="https://wa.me/5511921392248" target="_blank" rel="noopener noreferrer">
+            WhatsApp: (11) 92139-2248
+          </a>,
           "E-mail: contato@parcelei.com.br",
         ],
       },
