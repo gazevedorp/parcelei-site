@@ -209,6 +209,8 @@ h3{font-size:22px;line-height:1.25;letter-spacing:-.02em;font-weight:600}
 .foot-social a:hover{color:var(--n500);border-color:var(--n300)}
 .foot-social svg{width:18px;height:18px}
 .foot nav{display:flex;flex-direction:column;gap:12px}.foot nav b{color:var(--n900);font-weight:600;margin-bottom:4px}
+.foot-wa{display:flex;flex-direction:column;align-items:flex-start;gap:2px;line-height:1.35}
+.foot-wa span{white-space:nowrap;color:var(--n900);font-weight:600}
 .foot nav a:hover{color:var(--n500)}
 .foot-link{align-self:flex-start;padding:0;border:0;background:none;font:inherit;color:inherit;text-align:left;cursor:pointer;transition:color .2s}
 .foot-link:hover{color:var(--n500)}
@@ -286,6 +288,8 @@ html.modal-open{overflow:hidden}
 .legal-body p,.legal-body li{font-size:16px;line-height:1.7;color:#2c3557}
 .legal-body p+p{margin-top:14px}
 .legal-body strong{color:var(--n900);font-weight:600}
+.legal-body a{color:var(--n500);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.legal-body a:hover{color:var(--n900)}
 .legal-body ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin:14px 0}
 .legal-body li{position:relative;padding-left:22px}
 .legal-body li:before{content:"";position:absolute;left:4px;top:.72em;width:6px;height:6px;border-radius:50%;background:var(--n500)}
