@@ -14,7 +14,8 @@ export type LegalBlock =
 export type LegalSection = {
   id: string;
   title: string;
-  blocks: LegalBlock[];
+  blocks?: LegalBlock[];
+  content?: ReactNode;
 };
 
 type LegalDocProps = {
@@ -106,9 +107,10 @@ export function LegalDoc({ title, meta, intro, sections, closing }: LegalDocProp
             {sections.map((section) => (
               <section key={section.id} id={section.id}>
                 <h2>{section.title}</h2>
-                {section.blocks.map((block, index) => (
+                {section.blocks?.map((block, index) => (
                   <Block key={index} block={block} />
                 ))}
+                {section.content}
               </section>
             ))}
             {closing && <div className="legal-closing">{closing}</div>}
