@@ -79,11 +79,10 @@ export function SiteFooter() {
           </nav>
         </div>
         <div className="foot-bot">
+          <span>© 2026 Parcelei Serviços Digitais Ltda. Todos os direitos reservados.</span>
           <span>
-            © 2026 Parcelei Serviços Digitais Ltda. · CNPJ 58.473.999/0001-76 · Rua Conceição, 233,
-            sala 916, Centro, Campinas – SP
+            CNPJ 58.473.999/0001-76 · Rua Conceição, 233, sala 916, Centro, Campinas – SP
           </span>
-          <span>Todos os direitos reservados.</span>
         </div>
       </div>
     </footer>

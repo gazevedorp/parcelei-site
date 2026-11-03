@@ -532,6 +532,7 @@ export function HomePage() {
               <div>
                 <h3>Custo total exibido na tela</h3>
                 <p>Aqui você sabe exatamente tudo o que vai pagar antes de contratar o crédito.</p>
+                <small>CET</small>
               </div>
             </li>
             <li>
@@ -558,6 +559,7 @@ export function HomePage() {
                   Cada operação de crédito é formalizada por uma CCB (Cédula de Crédito Bancário),
                   de acordo com as regras do Banco Central do Brasil.
                 </p>
+                <small>CCB</small>
               </div>
             </li>
             <li>
@@ -570,6 +572,7 @@ export function HomePage() {
                   Aqui você dá o consentimento para podermos analisar seu crédito via Open Finance e
                   SCR.
                 </p>
+                <small>SCR · Open Finance</small>
               </div>
             </li>
           </ul>
