@@ -355,7 +355,7 @@ h1{font-size:48px;line-height:1.02;letter-spacing:-.04em}h2{font-size:34px;line-
 .phone-back{display:none}
 .phone{width:280px}
 .phone-hero{width:250px}
-.chip-a{left:8px;top:-36px}.chip-b{display:none}
+.chip-a{left:50%;right:auto;width:max-content;translate:-50% 0;top:-36px}.chip-b{display:none}
 .sh{margin-bottom:40px}.sh-row{flex-direction:column;align-items:flex-start;gap:12px}
 .how-grid{gap:0}
 .how-stage{display:none}
@@ -395,7 +395,7 @@ h1{font-size:48px;line-height:1.02;letter-spacing:-.04em}h2{font-size:34px;line-
 @media (max-width:768px){.hero-in,.how-grid,.faq-in{grid-template-columns:minmax(0,1fr)}}
 .chip-a{left:-145px;top:86px}.chip-b{left:calc(100% - 4px);right:auto;bottom:108px}
 .pend em{white-space:nowrap}
-@media (max-width:768px){.chip-a{left:8px;top:-36px}.chip-b{display:none}
+@media (max-width:768px){.chip-a{left:50%;right:auto;width:max-content;translate:-50% 0;top:-36px}.chip-b{display:none}
 .stores{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;width:100%;max-width:360px}
 .store{gap:8px;padding:10px 12px}.store svg{width:20px;height:20px}.store b{font-size:14px}
 .wl-msg,.wl-legal{margin-left:0;margin-right:0}.wl .btn{text-wrap:balance}

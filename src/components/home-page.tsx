@@ -376,7 +376,7 @@ export function HomePage() {
               </div>
               <div className="chip chip-b">
                 <small>1ª parcela</small>
-                <b>R$ 32,48</b>
+                <b>R$ 62,45</b>
               </div>
             </div>
             <div className="phone phone-back phone-back-r" aria-hidden="true">
