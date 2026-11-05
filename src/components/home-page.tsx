@@ -20,13 +20,13 @@ const PRINTS = [
 ];
 
 const STEPS = [
-  { title: "Leia o Pix no app", text: "Escaneie o QR Code da loja ou cole o código Copia e Cola." },
+  { title: "Abra seu app", text: "Escaneie o QR Code da loja ou cole o código Copia e Cola." },
   {
-    title: "Confirme e pague a 1ª parcela",
-    text: "Confira os valores e o custo total e pague a primeira parcela no Pix.",
+    title: "Confira as possibilidades de parcelamento e pague a primeira parcela",
+    text: "Veja suas possibilidades e o custo total.",
   },
   {
-    title: "Pronto, está pago",
+    title: "Pronto: sua compra foi paga",
     text: "A loja recebe na hora e as demais parcelas são cobradas pelo Pix Automático.",
   },
 ];
@@ -331,8 +331,8 @@ export function HomePage() {
               <span className="grad">Parcele no app.</span>
             </h1>
             <p className="lead">
-              Supermercado, mercearia e saúde divididos em parcelas, só com o seu CPF. A análise de
-              crédito é feita na hora.
+              Agora você pode parcelar suas compras de supermercado, farmácias e exames de uma
+              maneira simples e rápida. Sua análise de crédito é feita na hora.
             </p>
             <WaitlistForm />
             <StoreButtons />
@@ -376,7 +376,7 @@ export function HomePage() {
               </div>
               <div className="chip chip-b">
                 <small>1ª parcela</small>
-                <b>R$ 32,48</b>
+                <b>R$ 62,45</b>
               </div>
             </div>
             <div className="phone phone-back phone-back-r" aria-hidden="true">
@@ -460,7 +460,7 @@ export function HomePage() {
                 </span>
                 <div>
                   <h3>Supermercados e mercearias</h3>
-                  <p>A compra do mês e o comércio do bairro.</p>
+                  <p>Da compra do mês à mercearia do bairro.</p>
                 </div>
               </li>
               <li>
@@ -485,7 +485,6 @@ export function HomePage() {
                   <h3>
                     Outras lojas de varejo <span className="where-tag">Em breve</span>
                   </h3>
-                  <p>Novas categorias entram nas próximas etapas.</p>
                 </div>
               </li>
             </ul>
@@ -493,11 +492,12 @@ export function HomePage() {
           <div className="where-no">
             <h3>Não pode ser parcelado</h3>
             <ul>
-              <li>Pix enviado para CPF de pessoa física</li>
-              <li>Sites de apostas, cassinos e plataformas similares</li>
-              <li>Compras abaixo de R$ 40,00</li>
-              <li>Tributos, multas e renegociação de empréstimos</li>
-              <li>Pagamento de fatura de cartão</li>
+              <li>Pix para pessoa física</li>
+              <li>Sites de apostas e similares</li>
+              <li>Compras abaixo de R$ 200,00</li>
+              <li>Contas de consumo</li>
+              <li>Tributos</li>
+              <li>Faturas de cartão de crédito</li>
             </ul>
           </div>
         </div>
@@ -507,34 +507,9 @@ export function HomePage() {
         <div className="container trust-in">
           <div className="trust-head">
             <header className="sh">
-              <h2>Segurança e transparência em cada parcela.</h2>
-              <p className="sub">
-                A Parcelei segue a legislação brasileira de proteção de dados e de crédito. O custo
-                total aparece antes de você confirmar.
-              </p>
+              <h2>Segurança e transparência em cada operação.</h2>
+              <p className="sub">Aqui você sabe exatamente quanto vai pagar em cada parcela.</p>
             </header>
-            <dl className="trust-id">
-              <div>
-                <dt>Razão social</dt>
-                <dd>Parcelei Serviços Digitais Ltda.</dd>
-              </div>
-              <div>
-                <dt>CNPJ</dt>
-                <dd>58.473.999/0001-76</dd>
-              </div>
-              <div>
-                <dt>Sede</dt>
-                <dd>Rua Conceição, 233, sala 916, Centro, Campinas – SP</dd>
-              </div>
-              <div className="trust-docs">
-                <a href="/termos-de-uso" target="_blank" rel="noopener noreferrer">
-                  Termos de uso
-                </a>
-                <a href="/politica-de-privacidade" target="_blank" rel="noopener noreferrer">
-                  Política de privacidade
-                </a>
-              </div>
-            </dl>
           </div>
 
           <ul className="tr">
@@ -544,11 +519,8 @@ export function HomePage() {
                 <path d="M9 12l2 2 4-4" />
               </svg>
               <div>
-                <h3>Dados protegidos</h3>
-                <p>
-                  Seus dados são tratados conforme a LGPD, com medidas técnicas e administrativas
-                  de segurança.
-                </p>
+                <h3>Dados protegidos e segurança da informação</h3>
+                <p>Seus dados são tratados em conformidade com a LGPD.</p>
                 <small>Lei 13.709/2018</small>
               </div>
             </li>
@@ -558,11 +530,8 @@ export function HomePage() {
                 <path d="M8 8h8M8 12h8M8 16h5" />
               </svg>
               <div>
-                <h3>Custo total na tela</h3>
-                <p>
-                  Taxas, tributos e encargos aparecem no Custo Efetivo Total antes de você tocar em
-                  Pagar.
-                </p>
+                <h3>Custo total exibido na tela</h3>
+                <p>Aqui você sabe exatamente tudo o que vai pagar antes de contratar o crédito.</p>
                 <small>CET</small>
               </div>
             </li>
@@ -585,10 +554,10 @@ export function HomePage() {
                 <path d="M14 3v5h5M10 13h6M10 17h4" />
               </svg>
               <div>
-                <h3>Contrato formal</h3>
+                <h3>Contrato formalizado no ato da contratação</h3>
                 <p>
-                  Cada parcelamento é formalizado em uma Cédula de Crédito Bancário, enviada para o
-                  seu e-mail.
+                  Cada operação de crédito é formalizada por uma CCB (Cédula de Crédito Bancário),
+                  de acordo com as regras do Banco Central do Brasil.
                 </p>
                 <small>CCB</small>
               </div>
@@ -598,10 +567,10 @@ export function HomePage() {
                 <path d="M3 10l9-6 9 6M5 10v8M10 10v8M14 10v8M19 10v8M3 20h18" />
               </svg>
               <div>
-                <h3>Consultas autorizadas</h3>
+                <h3>Consultas de maneira transparente</h3>
                 <p>
-                  As consultas ao SCR do Banco Central e ao Open Finance usam a autorização que
-                  você dá no cadastro.
+                  Aqui você dá o consentimento para podermos analisar seu crédito via Open Finance e
+                  SCR.
                 </p>
                 <small>SCR · Open Finance</small>
               </div>

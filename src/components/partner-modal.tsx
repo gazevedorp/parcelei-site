@@ -127,7 +127,7 @@ export function PartnerModal() {
 
   return (
     <>
-      <button type="button" className="foot-link" onClick={open}>
+      <button type="button" className="btn btn-primary btn-sm foot-partner" onClick={open}>
         Parcerias para lojistas
       </button>
       <dialog

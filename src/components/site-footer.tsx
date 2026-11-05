@@ -8,7 +8,7 @@ export function SiteFooter() {
         <div className="foot-top">
           <div>
             <img src="/parcelei-logo-azul-horizontal-1024.png" alt="Parcelei" height={32} />
-            <p>Pix Parcelado sem cartão.</p>
+            <p>Parcele no Pix sem cartão.</p>
             <div className="foot-social">
               <a
                 href="https://www.instagram.com/parcelei_oficial/"
@@ -38,7 +38,7 @@ export function SiteFooter() {
                 href="https://wa.me/5511921392248"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="WhatsApp da Parcelei, (11) 92139-2248"
+                aria-label="WhatsApp da Parcelei"
               >
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M12 5.15a6.85 6.85 0 0 0-5.95 10.25L5.15 18.85l3.55-.9A6.85 6.85 0 1 0 12 5.15z" />
@@ -58,13 +58,11 @@ export function SiteFooter() {
           <nav>
             <b>Contato</b>
             <a
-              className="foot-wa"
               href="https://wa.me/5511921392248"
               target="_blank"
               rel="noopener noreferrer"
             >
               WhatsApp
-              <span>(11) 92139-2248</span>
             </a>
             <span>Atendimento em dias úteis.</span>
             <Link href="/#lista">Lista de espera</Link>

@@ -53,8 +53,8 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
         question: "O que é a Parcelei?",
         featured: true,
         answer: [
-          "A Parcelei é uma solução de crédito que permite fazer compras parceladas via Pix, sem depender de cartão de crédito.",
-          "Você tem acesso a um limite de crédito para realizar suas compras em estabelecimentos comerciais que comercializam, neste início, produtos essenciais: saúde e alimentação.",
+          "A Parcelei é uma solução de crédito que permite fazer compras e pagar de maneira parcelada via Pix, sem depender de cartão de crédito.",
+          "Após a aprovação do seu cadastro, você terá um limite de crédito pré-aprovado para fazer suas compras em estabelecimentos como supermercados, mercearias, farmácias e laboratórios de exames clínicos.",
         ],
       },
       {

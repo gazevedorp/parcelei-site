@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "src/app/globals.css"
+        ],
+        "createdAt": "2026-11-03T15:06:58.609Z",
+        "reason": "Incumbent brand sheen on hero title (.grad); established site motion, not introduced by this copy/alignment pass"
+      }
+    ]
+  }
+}
